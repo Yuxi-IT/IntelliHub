@@ -11,12 +11,13 @@ namespace IntelliHub.Models.Parser
         public static IWebDriver driver = new ChromeDriver(options);
         // 初始化 WebDriver
 
-        public static void Execute(string[] cmds)
+        public static string Execute(string[] cmds)
         {
+            driver.Navigate().GoToUrl("https://www.YuxiIT.com.cn");
             if (cmds.Length < 2)
             {
                 Debug.WriteLine("Invalid command format. Usage: <commandType> <args>");
-                return;
+                return "Invalid command format. Usage: <commandType> <args>";
             }
 
             string commandType = cmds[1].ToLower();
@@ -29,7 +30,7 @@ namespace IntelliHub.Models.Parser
                         if (cmds.Length < 3)
                         {
                             Debug.WriteLine("Invalid command format for Bing. Usage: Bing <url>");
-                            return;
+                            return "Invalid command format for Bing. Usage: Bing <url>";
                         }
                         var bingResults = "";
                         int i = 1;
@@ -50,7 +51,7 @@ namespace IntelliHub.Models.Parser
                         if (cmds.Length < 3)
                         {
                             Debug.WriteLine("Invalid command format for OpenUrl. Usage: OpenUrl <url>");
-                            return;
+                            return "Invalid command format for OpenUrl. Usage: OpenUrl <url>";
                         }
                         OpenUrl(SpaceConvert(cmds[2]));
                         break;
@@ -59,7 +60,7 @@ namespace IntelliHub.Models.Parser
                         if (cmds.Length < 3)
                         {
                             Debug.WriteLine("Invalid command format for ExecuteJavaScript. Usage: ExecuteJavaScript <script>");
-                            return;
+                            return "Invalid command format for ExecuteJavaScript. Usage: ExecuteJavaScript <script>";
                         }
                         string script = SpaceConvert(string.Join(" ", cmds, 2, cmds.Length - 2));
                         Debug.WriteLine($"执行JS：{script}");
@@ -68,13 +69,16 @@ namespace IntelliHub.Models.Parser
 
                     default:
                         Debug.WriteLine($"Unknown command type: {commandType}");
+                        return $"Unknown command type: {commandType}";
                         break;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error executing command '{commandType}': {ex.Message}");
+                return $"Error executing command '{commandType}': {ex.Message}";
             }
+            return "Suceess";
         }
 
         public static List<(string Title, string Link)> Bing(string key)
@@ -127,9 +131,11 @@ namespace IntelliHub.Models.Parser
             ((IJavaScriptExecutor)driver).ExecuteScript(script);
         }
 
-        private static string SpaceConvert(string input)
+        public static string SpaceConvert(string ipt)
         {
-            return input.Replace("%20", " ");
+            return ipt.Replace("%20", " ")
+                      .Replace("%22", "\"")
+                      .Replace("%0A", "\n");
         }
     }
 }

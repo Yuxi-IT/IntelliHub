@@ -6,12 +6,14 @@ namespace IntelliHub.Models.Parser
 {
     public class ShellExecutor
     {
-        public static void Execute(string[] cmds)
+        public static bool Execute(string[] cmds, out string output)
         {
+            output = string.Empty;
+
             if (cmds.Length < 3)
             {
-                Debug.WriteLine("Invalid command format.");
-                return;
+                output = "Invalid command format.";
+                return false;
             }
 
             string commandType = cmds[1].ToLower();
@@ -19,43 +21,57 @@ namespace IntelliHub.Models.Parser
 
             Debug.WriteLine(commandType);
 
-            switch (commandType)
+            try
             {
-                case "ps":
-                    ExecutePowerShell(command, false);
-                    break;
-                case "pshidden":
-                    ExecutePowerShell(command, true);
-                    break;
-                case "cmd":
-                    ExecuteCmd(command, false);
-                    break;
-                case "cmdhidden":
-                    ExecuteCmd(command, true);
-                    break;
 
-                default:
-                    Debug.WriteLine("Unknown command type.");
-                    break;
+                switch (commandType)
+                {
+                    case "ps":
+                        output = ExecutePowerShell(command, false);
+                        return true;
+
+                    case "pshidden":
+                        output = ExecutePowerShell(command, true);
+                        return true;
+
+                    case "cmd":
+                        output = ExecuteCmd(command, false);
+                        return true;
+
+                    case "cmdhidden":
+                        output = ExecuteCmd(command, true);
+                        return true;
+
+                    default:
+                        output = "Unknown command type.";
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                output = $"Command execution failed: {ex.Message}";
+                return false;
             }
         }
 
-        private static string SpaceConvert(string input)
+        public static string SpaceConvert(string ipt)
         {
-            return input.Replace("%20", " ");
+            return ipt.Replace("%20", " ")
+                      .Replace("%22", "\"")
+                      .Replace("%0A", "\n");
         }
 
-        private static void ExecutePowerShell(string command, bool hidden)
+        private static string ExecutePowerShell(string command, bool hidden)
         {
-            ExecuteCommand("powershell.exe", command, hidden);
+            return ExecuteCommand("powershell.exe", command, hidden);
         }
 
-        private static void ExecuteCmd(string command, bool hidden)
+        private static string ExecuteCmd(string command, bool hidden)
         {
-            ExecuteCommand("cmd.exe", "/C " + command, hidden);
+            return ExecuteCommand("cmd.exe", "/C " + command, hidden);
         }
 
-        private static void ExecuteCommand(string fileName, string arguments, bool hidden)
+        private static string ExecuteCommand(string fileName, string arguments, bool hidden)
         {
             try
             {
@@ -66,25 +82,29 @@ namespace IntelliHub.Models.Parser
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
-                    CreateNoWindow = hidden
+                    CreateNoWindow = hidden,
+                    StandardOutputEncoding = Encoding.UTF8, 
+                    StandardErrorEncoding = Encoding.UTF8
                 };
 
                 using (Process process = new Process { StartInfo = psi })
                 {
                     process.Start();
+
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
                     process.WaitForExit();
 
-                    if (!string.IsNullOrEmpty(output))
-                        Console.WriteLine(output);
                     if (!string.IsNullOrEmpty(error))
-                        Console.WriteLine("Error: " + error);
+                    {
+                        return $"Error: {error}";
+                    }
+                    return output;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Command execution failed: " + ex.Message);
+                return $"Command execution failed: {ex.Message}";
             }
         }
     }

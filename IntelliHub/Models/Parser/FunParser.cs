@@ -30,25 +30,34 @@ namespace IntelliHub.Models.Parser
             return func;
         }
 
-        public static bool Run(string input)
+        public static bool Run(string input,out string output)
         {
             int i = 0;
+            output = "NotFound";
             foreach (var line in input.Split("\n"))
             {
                 var cmds = input.Split(" ");
                 switch (cmds[0].ToLower())
                 {
                     case "file":
-                        FileParser.Parse(cmds); i++;
-                        break;
+                        var file = FileParser.Parse(cmds, out string FileOpt); i++;
+                        output = FileOpt;
+                        i++;
+                        return file;
+
                     case "web":
-                        WebParser.Parse(cmds); i++;
-                        break;
+                        var web = WebParser.Parse(cmds, out string WebOpt);
+                        output = WebOpt;
+                        i++;
+                        return web;
+
                     case "shell":
-                        ShellExecutor.Execute(cmds); i++;
-                        break;
+                        var shell = ShellExecutor.Execute(cmds, out string ShellOpt);
+                        output = ShellOpt;
+                        i++;
+                        return shell;
                     case "webdriver":
-                        WebDriverExecutor.Execute(cmds); i++;
+                        output = WebDriverExecutor.Execute(cmds); i++;
                         break;
                 }
             }

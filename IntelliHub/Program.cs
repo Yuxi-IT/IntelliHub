@@ -1,6 +1,5 @@
 ﻿using IntelliHub.Models;
 using IntelliHub.Models.Parser;
-using IntelliHubDesktop.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Text;
@@ -78,7 +77,10 @@ class Program
                             Content = choice.Message.Content
                         });
                         Console.WriteLine(choice.Message.Content);
-                        FunParser.Run(choice.Message.Content);
+                        FunParser.Run(choice.Message.Content, out string output);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(output);
+                        Console.ResetColor();
                     }
                 }
                 else

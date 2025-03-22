@@ -11,33 +11,33 @@
         mc:Ignorable="d"
         Title="IntelliHub" Height="600" Width="1000" MinWidth="1000" MinHeight="600">
     <Grid>
-        <ui:NavigationView IsBackButtonVisible="Collapsed" IsPaneOpen="False" OpenPaneLength="200">
+        <ui:NavigationView x:Name="MainFrame1" IsBackButtonVisible="Collapsed" IsPaneOpen="False" OpenPaneLength="200" SelectionChanged="MainFrame1_SelectionChanged">
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="主页">
+                <ui:NavigationViewItem Content="主页" Tag="Home">
                     <ui:NavigationViewItem.Icon>
                         <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Home}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
 
-                <ui:NavigationViewItem Content="聊天">
+                <ui:NavigationViewItem Content="聊天" Tag="Chat">
                     <ui:NavigationViewItem.Icon>
                         <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.ChatBubbles}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
 
-                <ui:NavigationViewItem Content="智能体">
+                <ui:NavigationViewItem Content="智能体" Tag="AISetting">
                     <ui:NavigationViewItem.Icon>
                         <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Robot}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
 
-                <ui:NavigationViewItem Content="工作流">
+                <ui:NavigationViewItem Content="工作流" Tag="WorkStream">
                     <ui:NavigationViewItem.Icon>
                         <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Work}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                
-                <ui:NavigationViewItem Content="工具集">
+
+                <ui:NavigationViewItem Content="工具集" Tag="Tools">
                     <ui:NavigationViewItem.Icon>
                         <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.OEM}"/>
                     </ui:NavigationViewItem.Icon>
@@ -46,7 +46,7 @@
             </ui:NavigationView.MenuItems>
 
             <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem Content="设置">
+                <ui:NavigationViewItem Content="设置" Tag="Setting">
                     <ui:NavigationViewItem.Icon>
                         <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Settings}"/>
                     </ui:NavigationViewItem.Icon>

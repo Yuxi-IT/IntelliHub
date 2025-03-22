@@ -1,72 +1,161 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IntelliHub.Models;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntelliHub.Models.Parser
 {
-    public class FileParser
+    public static class FileParser
     {
-        public static void Parse(string[] cmds)
+        public static bool Parse(string[] cmds, out string output)
         {
-            Debug.WriteLine($"操作文件 {cmds[1].ToLower()}");
-            switch (cmds[1].ToLower())
+            output = string.Empty;
+
+            try
             {
-                case "write":
-                    Write(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
-                    break;
-                case "move":
-                    Move(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
-                    break;
-                case "copy":
-                    Copy(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
-                    break;
-                case "del":
-                    Delect(SpaceConvert(cmds[2]));
-                    break;
-                case "replace":
-                    Replace(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]), SpaceConvert(cmds[4]));
-                    break;
-                case "read":
-                    var content = Read(SpaceConvert(cmds[2]));
-                    Program.msg.Add(
-                        new Message() 
-                        { 
-                            Role = "assistant", 
-                            Content = content 
-                        });
-                    Console.WriteLine(content);
-                    break;
-                default:
-                    break;
+                Debug.WriteLine($"操作文件 {cmds[1].ToLower()}");
+
+                switch (cmds[1].ToLower())
+                {
+                    case "write":
+                        output = Write(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
+                        return true;
+
+                    case "move":
+                        output = Move(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
+                        return true;
+
+                    case "copy":
+                        output = Copy(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
+                        return true;
+
+                    case "del":
+                        output = Delete(SpaceConvert(cmds[2]));
+                        return true;
+
+                    case "replace":
+                        output = Replace(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]), SpaceConvert(cmds[4]));
+                        return true;
+
+                    case "read":
+                        output = Read(SpaceConvert(cmds[2]));
+                        Program.msg.Add(
+                            new Message()
+                            {
+                                Role = "assistant",
+                                Content = output
+                            });
+                        return true;
+
+                    default:
+                        output = "未知命令";
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                output = $"操作失败: {ex.Message}";
+                return false;
             }
         }
+
         public static string SpaceConvert(string ipt)
         {
-            return ipt.Replace("%20"," ")
-                      .Replace("%22","\"")
-                      .Replace("%0A","\n");
+            return ipt.Replace("%20", " ")
+                      .Replace("%22", "\"")
+                      .Replace("%0A", "\n");
         }
 
-        private static void Replace(string path,string oldContent, string newContent)
-            => File.WriteAllText(path, Read(path).Replace(oldContent, newContent));
+        public static string Replace(string path, string oldContent, string newContent)
+        {
+            try
+            {
+                string fileContent = Read(path);
+                fileContent = fileContent.Replace(oldContent, newContent);
+                File.WriteAllText(path, fileContent);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Replace failed: {ex.Message}";
+            }
+        }
 
-        private static void Write(string path, string content)
-            => File.WriteAllText(path, content);
+        public static string Write(string path, string content)
+        {
+            try
+            {
+                File.WriteAllText(path, content);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Write failed: {ex.Message}";
+            }
+        }
 
-        private static void Move(string path, string newpath)
-            => File.Move(path, newpath);
+        public static string Delect(string path)
+        {
+            try
+            {
+                File.Delete(path);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Delect failed: {ex.Message}";
+            }
+        }
 
-        private static void Copy(string path, string newpath)
-            => File.Copy(path, newpath);
+        public static string Move(string path, string newPath)
+        {
+            try
+            {
+                File.Move(path, newPath);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Move failed: {ex.Message}";
+            }
+        }
 
-        private static void Delect(string path)
-            => File.Delete(path);
+        public static string Copy(string path, string newPath)
+        {
+            try
+            {
+                File.Copy(path, newPath);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Copy failed: {ex.Message}";
+            }
+        }
+
+        public static string Delete(string path)
+        {
+            try
+            {
+                File.Delete(path);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Delete failed: {ex.Message}";
+            }
+        }
 
         private static string Read(string path)
-            => File.ReadAllText(path);
+        {
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Read failed: {ex.Message}");
+            }
+        }
+
     }
 }

@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
+    <ProjectReference Include="..\IntelliHub\IntelliHub.csproj" />
   </ItemGroup>
 
 </Project>
