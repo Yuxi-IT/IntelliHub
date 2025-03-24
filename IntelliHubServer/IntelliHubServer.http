@@ -1,0 +1,6 @@
+@IntelliHubServer_HostAddress = http://localhost:5014
+
+GET {{IntelliHubServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

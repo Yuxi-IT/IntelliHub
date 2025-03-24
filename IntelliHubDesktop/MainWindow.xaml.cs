@@ -30,10 +30,11 @@ namespace IntelliHubDesktop
             Runtimes.Key = ConfigModel.Read("key");
             Loaded += (s, e) =>
             {
-                ThemeResources.Current.RequestedTheme = ApplicationTheme.Dark;
-                opt_Themebtn.Content = "☀";
-                opt_Themebtn.IsChecked = true;
+                //ThemeResources.Current.RequestedTheme = ApplicationTheme.Dark;
+                //opt_Themebtn.Content = "☀";
+                //opt_Themebtn.IsChecked = true;
             };
+
         }
         private void opt_Themebtn_Click(object sender, RoutedEventArgs e)
         {

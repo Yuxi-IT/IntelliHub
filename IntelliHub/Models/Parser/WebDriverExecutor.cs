@@ -13,7 +13,7 @@ namespace IntelliHub.Models.Parser
 
         public static string Execute(string[] cmds)
         {
-            driver.Navigate().GoToUrl("https://www.YuxiIT.com.cn");
+            driver.Navigate().GoToUrl("about:blank");
             if (cmds.Length < 2)
             {
                 Debug.WriteLine("Invalid command format. Usage: <commandType> <args>");
@@ -45,6 +45,7 @@ namespace IntelliHub.Models.Parser
                             Content = bingResults,
                             Role = "assistant"
                         });
+                        return bingResults;
                         break;
 
                     case "openurl":

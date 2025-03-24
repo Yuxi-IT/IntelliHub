@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHub", "IntelliHub\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHubDesktop", "IntelliHubDesktop\IntelliHubDesktop.csproj", "{D4E58BCA-5775-4A66-9E17-A97484A89012}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHubServer", "IntelliHubServer\IntelliHubServer.csproj", "{CC281F39-3859-484D-97F5-F4F2B61DBA4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHubMobile", "IntelliHubMobile\IntelliHubMobile.csproj", "{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,16 @@ Global
 		{D4E58BCA-5775-4A66-9E17-A97484A89012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4E58BCA-5775-4A66-9E17-A97484A89012}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4E58BCA-5775-4A66-9E17-A97484A89012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC281F39-3859-484D-97F5-F4F2B61DBA4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC281F39-3859-484D-97F5-F4F2B61DBA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC281F39-3859-484D-97F5-F4F2B61DBA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC281F39-3859-484D-97F5-F4F2B61DBA4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

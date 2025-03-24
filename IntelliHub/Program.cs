@@ -16,7 +16,6 @@ class Program
     新建c#项目直接使用dotnet new [console]即可
     环境 - 已安装
     -Python -Dotnet6.0/8.0/9.0 -PHP -JDK17 -NodeJS -ADB -Git -CMAKE
-
     File - 文件操作类
     -Write - path content(content有空格必须用%20代替)
     -Replace - path oldString newString //替换文件中所有指定的字符串
@@ -38,8 +37,9 @@ class Program
     -OpenUrl url
     -Bing url //必应搜索
 
-    如果用户让你删除文件d:\\1.txt，你只需要输出File Del d:\\1.txt就行了
-    只需要转义%20、%22、%0A，除了指令不要有任何多余的内容"
+    如果删除文件d:\\1.txt，只需输出File Del d:\\1.txt
+    除了指令不要有任何多余的内容。
+    API接口（需要用Web Get）：http://192.168.0.104/control?var=led_intensity&val=[灯光值]"
         }
     };
 
@@ -52,12 +52,6 @@ class Program
             var ipt = Console.ReadLine();
             if (!Regex.IsMatch(ipt, @"(?<!\\)\\(?![\\\""'nrtbf])"))
                 ipt = Regex.Replace(ipt, @"(?<!\\)\\(?![\\\""'nrtbf])", @"\\");
-
-            /*
-             FunParser.Run(ipt);
-             continue;
-             */
-
             if (!string.IsNullOrEmpty(ipt))
             {
                 msg.Add(new Message()
@@ -66,7 +60,7 @@ class Program
                     Content = ipt
                 });
 
-                var cpm = ChatApiRequest.Send(msgs: msg,apikey: ConfigModel.Read("key"), Model: "deepseek-v3");
+                var cpm = ChatApiRequest.Send(msgs: msg,apikey: Runtimes.ApiKey, Model: "deepseek-v3");
                 if(cpm != null)
                 {
                     foreach (var choice in cpm.Choices)

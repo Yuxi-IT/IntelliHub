@@ -17,7 +17,7 @@ namespace IntelliHub.Models.Parser
                 switch (cmds[1].ToLower())
                 {
                     case "write":
-                        output = Write(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]));
+                        output = Write(SpaceConvert(cmds[2]), SpaceConvert(string.Join(" ", cmds, 3, cmds.Length - 3)));
                         return true;
 
                     case "move":
@@ -33,7 +33,7 @@ namespace IntelliHub.Models.Parser
                         return true;
 
                     case "replace":
-                        output = Replace(SpaceConvert(cmds[2]), SpaceConvert(cmds[3]), SpaceConvert(cmds[4]));
+                        output = Replace(SpaceConvert(cmds[2]), SpaceConvert(string.Join(" ", cmds, 3, cmds.Length - 3)), SpaceConvert(string.Join(" ", cmds, 4, cmds.Length - 4)));
                         return true;
 
                     case "read":

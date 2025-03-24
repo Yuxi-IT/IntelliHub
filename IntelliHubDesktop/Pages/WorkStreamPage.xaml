@@ -49,11 +49,10 @@
                     </StackPanel>
                 </Button>
             </Grid>
-            <Button Content="保存" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" Width="100" Click="SaveSettings_Click" />
 
             <Border CornerRadius="10,10,10,10" Background="#33FFFFFF" Margin="0,77,0,85" HorizontalAlignment="Center" MinWidth="350">
                 <ScrollViewer>
-                    <ui:ListView x:Name="todoList" Margin="10,60,10,10">
+                    <ui:ListView x:Name="todoList" Margin="10,10,10,10">
                         <ui:ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" 
@@ -63,11 +62,18 @@
                     </ui:ListView>
                 </ScrollViewer>
             </Border>
+            <Button Content="保存" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,385,0,0" Width="100" Click="SaveSettings_Click" />
         </Grid>
-        <Button x:Name="RunWork" VerticalAlignment="Top" Margin="160,7,0,0" Width="100" Click="RunWork_Click" Background="#B32FA4FF" >
+        <Button x:Name="RunWork" VerticalAlignment="Top" Margin="265,7,0,0" Width="100" Click="RunWork_Click" Background="#B32FA4FF" >
             <StackPanel Orientation="Horizontal">
                 <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Play}"/>
                 <TextBlock Text="运行" Margin="5,0,0,0" />
+            </StackPanel>
+        </Button>
+        <Button VerticalAlignment="Top" Margin="150,7,0,0" Width="110" >
+            <StackPanel Orientation="Horizontal">
+                <ui:FontIcon Icon="{x:Static ui:SegoeFluentIcons.Robot}"/>
+                <TextBlock Text="用AI创建" Margin="5,0,0,0" />
             </StackPanel>
         </Button>
     </Grid>

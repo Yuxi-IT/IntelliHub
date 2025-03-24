@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntelliHub.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace IntelliHubDesktop.Pages
     /// </summary>
     public partial class ChatPage : Page
     {
+        
+
         public ChatPage()
         {
             InitializeComponent();
