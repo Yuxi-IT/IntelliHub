@@ -10,7 +10,7 @@ namespace IntelliHub.Models
 {
     public class ChatApiRequest
     {
-        //sk-66rpY8To1p4wBhCf6yVwZF3u8VQTUumQNXinhf2H8lDJhtwP
+        
         public static ChatCompletion Send(List<Message> msgs, string apikey, string Model = "gpt-3.5-turbo")
         {
             try
