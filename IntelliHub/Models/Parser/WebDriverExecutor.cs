@@ -40,7 +40,7 @@ namespace IntelliHub.Models.Parser
                             Console.WriteLine(iS);
                             bingResults += $"{iS}\n";
                         }
-                        Program.msg.Add(new Message
+                        Runtimes.msg.Add(new Message
                         {
                             Content = bingResults,
                             Role = "assistant"

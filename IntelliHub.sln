@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHubServer", "Intelli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHubMobile", "IntelliHubMobile\IntelliHubMobile.csproj", "{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliHubTest", "IntelliHubTest\IntelliHubTest.csproj", "{49A34F8A-BFFE-49A5-ABC1-79E315D38A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADF2AA28-9F93-41BF-A5F7-FCF6DBEF121C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{49A34F8A-BFFE-49A5-ABC1-79E315D38A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A34F8A-BFFE-49A5-ABC1-79E315D38A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A34F8A-BFFE-49A5-ABC1-79E315D38A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A34F8A-BFFE-49A5-ABC1-79E315D38A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

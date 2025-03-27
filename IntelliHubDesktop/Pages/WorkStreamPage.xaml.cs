@@ -116,7 +116,13 @@ namespace IntelliHubDesktop.Pages
             var selectedWorkStream = WStreamListView.SelectedItem as WorkStream;
             if (selectedWorkStream != null)
             {
-                RunWork runWork = new RunWork(selectedWorkStream);
+                WorkStream newWorkStream = new();
+                newWorkStream.Todos = selectedWorkStream.Todos;
+                newWorkStream.ID = selectedWorkStream.ID;
+                newWorkStream.WorkName = selectedWorkStream.WorkName;
+                newWorkStream.Desp = selectedWorkStream.Desp;
+
+                RunWork runWork = new(newWorkStream);
                 runWork.Show();
             }
         }

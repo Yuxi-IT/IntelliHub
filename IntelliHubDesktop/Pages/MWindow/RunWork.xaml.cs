@@ -31,7 +31,11 @@ namespace IntelliHubDesktop.Pages.MWindow
         {
             InitializeComponent();
 
-            ws = runWs;
+            ws.WorkName = runWs.WorkName;
+            ws.Desp = runWs.Desp;
+            ws.ID = runWs.ID;
+            ws.Todos = runWs.Todos;
+
             StartButton.Click += StartButton_Click;
 
             Loaded += (s, e) =>
@@ -41,7 +45,7 @@ namespace IntelliHubDesktop.Pages.MWindow
                 RemainingTodo.ItemsSource = RemainingTodos;
             };
 
-            Title = $"工作流：{runWs.WorkName} - {runWs.ID} - 共{runWs.Todos.Count}条流程";
+            Title = $"工作流：{ws.WorkName} - {ws.ID} - 共{ws.Todos.Count}条流程";
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)

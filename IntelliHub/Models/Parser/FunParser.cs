@@ -30,38 +30,86 @@ namespace IntelliHub.Models.Parser
             return func;
         }
 
-        public static bool Run(string input,out string output)
+        public static bool RunAll(string input,out string output)
         {
             int i = 0;
             output = "NotFound";
-            foreach (var line in input.Split("\n"))
+            var cmds = input.Split("\n");
+            foreach (var line in cmds)
             {
-                var cmds = input.Split(" ");
-                switch (cmds[0].ToLower())
+                var pars = line.Split(" ");
+                switch (pars[0].ToLower())
                 {
                     case "file":
-                        var file = FileParser.Parse(cmds, out string FileOpt); i++;
+                        var file = FileParser.Parse(pars, out string FileOpt);
                         output = FileOpt;
                         i++;
                         return file;
 
                     case "web":
-                        var web = WebParser.Parse(cmds, out string WebOpt);
+                        var web = WebParser.Parse(pars, out string WebOpt);
                         output = WebOpt;
                         i++;
                         return web;
 
                     case "shell":
-                        var shell = ShellExecutor.Execute(cmds, out string ShellOpt);
+                        var shell = ShellExecutor.Execute(pars, out string ShellOpt);
                         output = ShellOpt;
                         i++;
                         return shell;
+
                     case "webdriver":
-                        output = WebDriverExecutor.Execute(cmds); i++;
+                        output = WebDriverExecutor.Execute(pars);
+                        i++;
                         break;
+
+                    case "window":
+                        var window = WindowParser.Parse(pars, out string WindowOpt);
+                        i++;
+                        output = WindowOpt;
+                        return window;
                 }
             }
-            Debug.WriteLine($"解析 {i} 条指令");
+            return true;
+        }
+
+        public static bool Run(string input, out string output)
+        {
+            int i = 0;
+            output = "NotFound";
+            input = input.Split('\n')[0];
+            var pars = input.Split(" ");
+            switch (pars[0].ToLower())
+            {
+                case "file":
+                    var file = FileParser.Parse(pars, out string FileOpt);
+                    output = FileOpt;
+                    i++;
+                    return file;
+
+                case "web":
+                    var web = WebParser.Parse(pars, out string WebOpt);
+                    output = WebOpt;
+                    i++;
+                    return web;
+
+                case "shell":
+                    var shell = ShellExecutor.Execute(pars, out string ShellOpt);
+                    output = ShellOpt;
+                    i++;
+                    return shell;
+
+                case "webdriver":
+                    output = WebDriverExecutor.Execute(pars);
+                    i++;
+                    break;
+
+                case "window":
+                    var window = WindowParser.Parse(pars, out string WindowOpt);
+                    i++;
+                    output = WindowOpt;
+                    return window;
+            }
             return true;
         }
     }

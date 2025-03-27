@@ -31,7 +31,7 @@ namespace IntelliHub.Models.Parser
                         case "get":
                             // 发送 GET 请求
                             string content = client.DownloadString(SpaceConvert(cmds[2]));
-                            Program.msg.Add(
+                            Runtimes.msg.Add(
                                 new Message()
                                 {
                                     Role = "assistant",
@@ -46,7 +46,7 @@ namespace IntelliHub.Models.Parser
                             // 发送 POST 请求
                             string postData = SpaceConvert(cmds[3]);
                             string pcontent = client.UploadString(SpaceConvert(cmds[2]), postData);
-                            Program.msg.Add(
+                            Runtimes.msg.Add(
                                 new Message()
                                 {
                                     Role = "assistant",

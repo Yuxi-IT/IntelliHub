@@ -38,7 +38,7 @@ namespace IntelliHub.Models.Parser
 
                     case "read":
                         output = Read(SpaceConvert(cmds[2]));
-                        Program.msg.Add(
+                        Runtimes.msg.Add(
                             new Message()
                             {
                                 Role = "assistant",
