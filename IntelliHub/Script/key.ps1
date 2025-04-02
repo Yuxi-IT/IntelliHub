@@ -10,24 +10,20 @@ using System.Runtime.InteropServices;
 
 public class InputSimulator
 {
-    // 键盘模拟
     [DllImport("user32.dll", SetLastError=true)]
     public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
     
-    // 鼠标模拟
     [DllImport("user32.dll", SetLastError=true)]
     public static extern bool SetCursorPos(int X, int Y);
     
     [DllImport("user32.dll", SetLastError=true)]
     public static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, UIntPtr dwExtraInfo);
     
-    // 鼠标事件常量
     public const uint MOUSEEVENTF_LEFTDOWN = 0x0002;
     public const uint MOUSEEVENTF_LEFTUP = 0x0004;
     public const uint MOUSEEVENTF_RIGHTDOWN = 0x0008;
     public const uint MOUSEEVENTF_RIGHTUP = 0x0010;
     
-    // 虚拟键码
     public const byte VK_RETURN = 0x0D;
     public const byte VK_TAB = 0x09;
     public const byte VK_ESC = 0x1B;
@@ -72,9 +68,7 @@ function Send-Click {
     }
 }
 
-# 主程序
 switch ($action.ToLower()) {
-    # 单个字母/数字键
     { $_ -match "^[a-z0-9]$" } {
         $keyCode = [byte][char]$_
         Send-Key $keyCode $false
@@ -83,7 +77,6 @@ switch ($action.ToLower()) {
         break
     }
     
-    # 特殊按键
     "enter"     { Send-Key [InputSimulator]::VK_RETURN $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_RETURN $true }
     "tab"       { Send-Key [InputSimulator]::VK_TAB $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_TAB $true }
     "esc"       { Send-Key [InputSimulator]::VK_ESC $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_ESC $true }
@@ -92,11 +85,9 @@ switch ($action.ToLower()) {
     "alt"       { Send-Key [InputSimulator]::VK_MENU $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_MENU $true }
     "shift"     { Send-Key [InputSimulator]::VK_SHIFT $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_SHIFT $true }
     
-    # 功能键
     "f1"        { Send-Key [InputSimulator]::VK_F1 $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_F1 $true }
     "f12"       { Send-Key [InputSimulator]::VK_F12 $false; Start-Sleep -Milliseconds 50; Send-Key [InputSimulator]::VK_F12 $true }
     
-    # 鼠标操作
     "click"     { Send-Click $x $y $false }
     "rightclick" { Send-Click $x $y $true }
     "move"      { 

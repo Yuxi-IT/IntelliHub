@@ -19,7 +19,7 @@ namespace IntelliHubDesktop.Models
         public string ID { get; set; } = Guid.NewGuid().ToString();
         public string WorkName { get; set; }
         public string? Desp { get; set; }
-        public ObservableCollection<TodoItem> Todos { get; set; } = new();
+        public List<TodoItem> Todos { get; set; } = new();
     }
 
     internal class WorkStreamModel

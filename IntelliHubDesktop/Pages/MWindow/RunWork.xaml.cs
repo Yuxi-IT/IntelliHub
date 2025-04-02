@@ -22,8 +22,8 @@ namespace IntelliHubDesktop.Pages.MWindow
     /// </summary>
     public partial class RunWork : Window
     {
-        public ObservableCollection<TodoItem> CompletedTodos { get; set; } = new ObservableCollection<TodoItem>();
-        public ObservableCollection<TodoItem> RemainingTodos { get; set; } = new ObservableCollection<TodoItem>();
+        public List<TodoItem> CompletedTodos { get; set; } = new();
+        public List<TodoItem> RemainingTodos { get; set; } = new();
         
         public WorkStream ws = new WorkStream();
 
@@ -40,7 +40,7 @@ namespace IntelliHubDesktop.Pages.MWindow
 
             Loaded += (s, e) =>
             {
-                RemainingTodos = ws.Todos;
+                RemainingTodos = ws.Todos.ToList();
                 CompletedTodo.ItemsSource = CompletedTodos;
                 RemainingTodo.ItemsSource = RemainingTodos;
             };
@@ -97,8 +97,8 @@ namespace IntelliHubDesktop.Pages.MWindow
         {
             LogOutput.Items.Clear();
 
-            CompletedTodos = new ObservableCollection<TodoItem>();
-            RemainingTodos = new ObservableCollection<TodoItem>(ws.Todos);
+            CompletedTodos = new List<TodoItem>();
+            RemainingTodos = new List<TodoItem>(ws.Todos);
 
             CompletedTodo.ItemsSource = CompletedTodos;
             RemainingTodo.ItemsSource = RemainingTodos;

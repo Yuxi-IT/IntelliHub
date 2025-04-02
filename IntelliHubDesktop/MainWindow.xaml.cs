@@ -30,9 +30,12 @@ namespace IntelliHubDesktop
             Runtimes.Key = ConfigModel.Read("key");
             Loaded += (s, e) =>
             {
-                ThemeResources.Current.RequestedTheme = ApplicationTheme.Dark;
-                opt_Themebtn.Content = "☀";
-                opt_Themebtn.IsChecked = true;
+                //ThemeResources.Current.RequestedTheme = ApplicationTheme.Dark;
+                //opt_Themebtn.Content = "☀";
+                //opt_Themebtn.IsChecked = true;
+
+                MainFrame1.SelectedItem = MainFrame1.MenuItems[0];
+                MainFrame.Navigate(typeof(HomePage));
             };
 
         }
